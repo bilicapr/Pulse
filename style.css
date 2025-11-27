@@ -1,0 +1,125 @@
+/* style.css */
+
+/* === 全局样式 === */
+:root { 
+    --bg-color: #0f172a;       /* 深蓝背景 */
+    --box-bg: #1e293b;         /* 卡片背景 */
+    --border-color: #334155;   /* 边框颜色 */
+    --text-main: #f8fafc;      /* 主文字白 */
+    --text-sub: #94a3b8;       /* 副文字灰 */
+}
+
+body {
+    margin: 0; padding: 20px; min-height: 100vh;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+}
+
+/* === 大框框容器 === */
+.big-box {
+    width: 100%;
+    max-width: 900px;
+    background: var(--box-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    padding: 40px;
+    text-align: center;
+}
+
+.header-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 40px;
+    letter-spacing: -1px;
+    font-style: italic;
+}
+
+/* === 设备列表行 === */
+.device-row {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed var(--border-color);
+    font-size: 1.25rem;
+    line-height: 1.6;
+}
+
+.device-row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.dev-name {
+    color: var(--text-main);
+    font-weight: 700;
+    margin-right: 12px;
+    white-space: nowrap;
+}
+
+.dev-status {
+    text-align: left;
+    word-break: break-word;
+}
+
+/* === 状态颜色 === */
+.status-online { color: #34d399; } /* 亮绿 */
+.status-unknown { color: #64748b; font-style: italic; } /* 灰色 (未知使用) */
+.status-sleep { color: #d18bfa; }   /* 紫色 (熄屏/挂机) */
+
+.footer {
+    margin-top: 40px;
+    font-size: 0.9rem;
+    color: var(--text-sub);
+    font-family: monospace;
+}
+
+/* 手机端适配 */
+@media (max-width: 600px) {
+    .big-box { padding: 25px 15px; }
+    .header-title { font-size: 1.6rem; margin-bottom: 30px; }
+    .device-row { 
+        font-size: 1.1rem; 
+        justify-content: flex-start;
+        text-align: left;
+    }
+    .dev-name { width: 100%; margin-bottom: 4px; display:block; }
+}
+
+/* === 侧边统计栏 === */
+.stats-panel { 
+    position: fixed; top:0; right:0; bottom:0; 
+    width: 480px; 
+    background: var(--box-bg); border-left: 1px solid var(--border-color);
+    transform:translateX(100%); transition:0.4s cubic-bezier(0.2,0.8,0.2,1); 
+    box-shadow:-10px 0 60px rgba(0,0,0,0.6); padding:40px; z-index:100; 
+    display:flex; flex-direction:column; color: var(--text-main);
+}
+.stats-panel.active { transform:translateX(0); }
+
+.overlay { position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:99; opacity:0; pointer-events:none; transition:0.3s; }
+.overlay.active { opacity:1; pointer-events:auto; }
+
+.stats-header { font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 5px; }
+.stats-sub { font-size: 1rem; color: var(--text-sub); margin-bottom: 35px; }
+
+.stats-item { margin-bottom: 20px; }
+.stats-info { display: flex; justify-content: space-between; font-size: 1.1rem; color: #e2e8f0; margin-bottom: 8px; }
+.stats-percent { color: var(--text-sub); font-size: 0.95rem; }
+.progress-bg { width: 100%; height: 8px; background: var(--border-color); border-radius: 4px; overflow:hidden; }
+.progress-bar { height:100%; border-radius:4px; }
+
+.btn-close { margin-top: auto; padding: 15px; width: 100%; border: 1px solid var(--border-color); background: transparent; color: var(--text-sub); border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 1rem; }
+.btn-close:hover { background: rgba(255,255,255,0.05); color: #fff; }
+
+@media (max-width: 600px) { .stats-panel { width: 85%; padding: 25px; } }
+
+/* 悬浮按钮 */
+.fab-btn { position: fixed; bottom: 30px; right: 30px; background: #3b82f6; color: white; border: none; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5); transition:all 0.2s; font-size:1.6rem; z-index:90; }
+.fab-btn:hover { transform:scale(1.1); }
