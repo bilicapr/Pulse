@@ -86,6 +86,8 @@
 **多设备卡片:**
 ```markdown
 ![My Status](https://your-domain.com/card.php?device=MyPC,APhone)(https://your-domain.com/)
+```
 **单设备卡片:**
 ```markdown
-![My Status](https://your-domain.com/card.php?device=MyPC(https://your-domain.com/card.php?device=MyPC))
+![My Status](https://your-domain.com/card.php?device=MyPC(https://your-domain.com/))
+```
