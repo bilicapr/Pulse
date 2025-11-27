@@ -43,9 +43,9 @@
     修改 `config.php` 文件，填入数据库信息和 API 密钥。
     ```php
     define('DB_HOST', 'localhost');
-    define('DB_USER', 'root');
-    define('DB_PASS', 'your_password');
-    define('API_SECRET', 'your_secure_key'); // 务必修改此密钥
+    define('DB_USER', 'u_user');
+    define('DB_PASS', 'u_password');
+    define('API_SECRET', 'u_key'); // 务必修改此密钥
     ```
 
 3.  **上传文件**：
