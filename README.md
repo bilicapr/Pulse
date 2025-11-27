@@ -83,6 +83,9 @@
 
 你可以将实时的状态卡片嵌入到你的 GitHub README 或个人博客中。
 
-**双设备卡片 (推荐):**
+**多设备卡片:**
 ```markdown
-[![My Status](https://sleepy.0112520.xyz/card.php?device=MyPC,APhone)](https://sleepy.0112520.xyz/)
+![My Status](https://your-domain.com/card.php?device=MyPC,APhone)(https://your-domain.com/)
+**单设备卡片:**
+```markdown
+![My Status](https://your-domain.com/card.php?device=MyPC(https://your-domain.com/card.php?device=MyPC))
