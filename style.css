@@ -1,6 +1,6 @@
 /* style.css */
 
-/* === 全局样式 === */
+/* === 全局样式 (深色) === */
 :root { 
     --bg-color: #0f172a;       /* 深蓝背景 */
     --box-bg: #1e293b;         /* 卡片背景 */
@@ -120,6 +120,15 @@ body {
 
 @media (max-width: 600px) { .stats-panel { width: 85%; padding: 25px; } }
 
-/* 悬浮按钮 */
 .fab-btn { position: fixed; bottom: 30px; right: 30px; background: #3b82f6; color: white; border: none; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5); transition:all 0.2s; font-size:1.6rem; z-index:90; }
 .fab-btn:hover { transform:scale(1.1); }
+.page-bottom {
+    position: fixed;
+    bottom: 15px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #64748b;
+    pointer-events: none;
+}

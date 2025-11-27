@@ -68,44 +68,48 @@
             const secondsAgo = parseInt(dev.seconds_ago);
             const isSleeping = dev.is_sleeping == 1;
             
-            const isDead = secondsAgo > 3600; // 3600秒 -> 彻底离线
-            const isDisconnected = secondsAgo > 60; // 60秒 -> 连接中断
+            const isDead = secondsAgo > 3600;      // 1小时 -> 未知使用
+            const isDisconnected = secondsAgo > 60;// 60秒 -> 连接中断
 
             let cssClass = "status-online";
             let text = "";
             
-            // 1. 彻底离线 (>3600秒)
+            // 1. 彻底离线 (>1小时)
             if (isDead) {
                 cssClass = "status-unknown";
                 text = "不知道在干什么"; 
             } 
-            // 2. 连接中断 (>60秒)
+            // 2. 暂时断连 (>60秒) [核心修改]
             else if (isDisconnected) {
-                cssClass = "status-unknown";
+                cssClass = "status-unknown"; // 变灰
                 
-                // 如果是挂机或熄屏状态断开，尝试保留状态标签
+                // 如果是挂机/熄屏状态断开，保留 "挂机/熄屏" 提示，因为这不算"打开的软件"
                 if (isSleeping) {
                     let tag = (dev.app_name && dev.app_name.includes('熄屏')) ? "熄屏" : "挂机";
+                    // 尝试保留电量前缀 (如果 app_name 是 [80%])
                     let prefix = "";
                     if (dev.app_name && dev.app_name.startsWith('[')) {
                          prefix = dev.app_name.split(']')[0] + "] ";
                     }
                     text = `${prefix}[${tag}] (无信号)`;
                 } 
+                // 如果是活跃状态断开，直接屏蔽内容，只显示连接中断
                 else {
                     text = "无网络(连接中断)";
                 }
             } 
-            // 3. 在线状态
+            // 3. 正常在线 (<60秒)
             else {
                 let appName = dev.app_name || "";
                 let details = dev.details || "";
                 let displayContent = "";
-                // 优先处理特殊标签
+
+                // === 手机端逻辑 ===
                 if (appName.startsWith('[') || appName.includes('熄屏')) {
                     cssClass = appName.includes('熄屏') ? "status-sleep" : "status-online";
                     displayContent = appName + " " + details;
                 } 
+                // === 电脑端逻辑 ===
                 else {
                     if (isSleeping) {
                         cssClass = "status-sleep";
@@ -136,6 +140,7 @@
                     }
                 }
                 
+                // 只有在线时才执行截断
                 text = truncate(displayContent, MAX_LEN);
             }
 
@@ -191,6 +196,8 @@
     updateStatus();
     setInterval(updateStatus, REFRESH_MS);
 </script>
-
+<div class="page-bottom">
+    <strong>By bilicapr</strong>
+</div>
 </body>
 </html>
